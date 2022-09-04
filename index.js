@@ -59,30 +59,3 @@ let monster = getNewMonster();
 const wizard = new Character(characterData.hero);
 
 render();
-
-setTimeout(
-  () =>
-    console.log(
-      `Once upon a time, a beautiful princess met a handsome prince.`
-    ),
-  1000
-);
-setTimeout(
-  () => console.log(`In the end, they lived happily ever after.`),
-  5000
-);
-setTimeout(
-  () =>
-    console.log(
-      `The princess's wicked stepmother put a curse on them before they could marry.`
-    ),
-  3000
-);
-setTimeout(
-  () => console.log(`They got married on a beautiful summer's day.`),
-  2000
-);
-setTimeout(
-  () => console.log(`The prince found a friendly wizard to lift the curse.`),
-  4000
-);
