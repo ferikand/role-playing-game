@@ -2,6 +2,7 @@ import characterData from "./data.js";
 import Character from "./Character.js";
 
 let monstersArray = ["orc", "demon", "goblin"];
+let isWaiting = false;
 
 function getNewMonster() {
   if (monstersArray.length === 0) return [];
@@ -10,24 +11,28 @@ function getNewMonster() {
 }
 
 function attack() {
-  wizard.getDiceHtml();
-  monster.getDiceHtml();
-  wizard.takeDamage(monster.currentDiceScore);
-  monster.takeDamage(wizard.currentDiceScore);
-  render();
+  if (!isWaiting) {
+    wizard.getDiceHtml();
+    monster.getDiceHtml();
+    wizard.takeDamage(monster.currentDiceScore);
+    monster.takeDamage(wizard.currentDiceScore);
+    render();
 
-  if (wizard.dead) {
-    setTimeout(endGame, 3000);
-  } else if (monster.dead) {
-    if (monstersArray.length !== 0) {
-      monster = getNewMonster();
-      setTimeout(render, 4000);
-    } else {
-      setTimeout(endGame, 3000);
+    if (wizard.dead) {
+      endGame();
+    } else if (monster.dead) {
+      isWaiting = true;
+      if (monstersArray.length > 0) {
+        setTimeout(() => {
+          monster = getNewMonster();
+          render();
+          isWaiting = false;
+        }, 1500);
+      } else {
+        endGame();
+      }
     }
   }
-
-  setTimeout(render, 3000);
 }
 
 function endGame() {
