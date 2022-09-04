@@ -17,17 +17,17 @@ function attack() {
   render();
 
   if (wizard.dead) {
-    endGame();
+    setTimeout(endGame, 3000);
   } else if (monster.dead) {
     if (monstersArray.length !== 0) {
       monster = getNewMonster();
-      render();
+      setTimeout(render, 4000);
     } else {
-      endGame();
+      setTimeout(endGame, 3000);
     }
   }
 
-  render();
+  setTimeout(render, 3000);
 }
 
 function endGame() {
